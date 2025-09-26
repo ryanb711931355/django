@@ -5,7 +5,13 @@ from .base import WidgetTest
 
 class SelectMultipleTest(WidgetTest):
     widget = SelectMultiple
-    numeric_choices = (("0", "0"), ("1", "1"), ("2", "2"), ("3", "3"), ("0", "extra"))
+    numeric_choices = (
+        ("0", "0"),
+        ("1", "1"),
+        ("2", "2"),
+        ("3", "3"),
+        ("0", "extra"),
+    )
 
     def test_format_value(self):
         widget = self.widget(choices=self.numeric_choices)
