@@ -294,7 +294,9 @@ class MultiWidgetTest(WidgetTest):
             widget,
             "code",
             None,
-            html=('<input type="text" name="code_0"><input type="text" name="code_1">'),
+            html=(
+                '<input type="text" name="code_0"><input type="text" name="code_1">'
+            ),
             strict=True,
         )
 

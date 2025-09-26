@@ -522,10 +522,10 @@ class HTTPSitemapTests(SitemapTestsBase):
         self.assertNotIn("Last-Modified", index_response)
         self.assertNotIn("Last-Modified", sitemap_response)
         expected_content_index = """<?xml version="1.0" encoding="UTF-8"?>
-        <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-        <sitemap><loc>http://example.com/simple/sitemap-callable-lastmod.xml</loc></sitemap>
-        </sitemapindex>
-        """
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<sitemap><loc>http://example.com/simple/sitemap-callable-lastmod.xml</loc></sitemap>
+</sitemapindex>
+"""
         expected_content_sitemap = (
             '<?xml version="1.0" encoding="UTF-8"?>\n'
             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
@@ -552,10 +552,10 @@ class HTTPSitemapTests(SitemapTestsBase):
             sitemap_response.headers["Last-Modified"], "Thu, 13 Mar 2014 10:00:00 GMT"
         )
         expected_content_index = """<?xml version="1.0" encoding="UTF-8"?>
-        <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-        <sitemap><loc>http://example.com/simple/sitemap-callable-lastmod.xml</loc><lastmod>2014-03-13T10:00:00</lastmod></sitemap>
-        </sitemapindex>
-        """
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<sitemap><loc>http://example.com/simple/sitemap-callable-lastmod.xml</loc><lastmod>2014-03-13T10:00:00</lastmod></sitemap>
+</sitemapindex>
+"""
         expected_content_sitemap = (
             '<?xml version="1.0" encoding="UTF-8"?>\n'
             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
@@ -573,8 +573,8 @@ class HTTPSitemapTests(SitemapTestsBase):
         index_response = self.client.get("/callable-lastmod-no-items/index.xml")
         self.assertNotIn("Last-Modified", index_response)
         expected_content_index = """<?xml version="1.0" encoding="UTF-8"?>
-        <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-        <sitemap><loc>http://example.com/simple/sitemap-callable-lastmod.xml</loc></sitemap>
-        </sitemapindex>
-        """
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<sitemap><loc>http://example.com/simple/sitemap-callable-lastmod.xml</loc></sitemap>
+</sitemapindex>
+"""
         self.assertXMLEqual(index_response.text, expected_content_index)

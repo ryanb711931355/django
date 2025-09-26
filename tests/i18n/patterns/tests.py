@@ -314,7 +314,7 @@ class URLRedirectTests(URLTestCaseBase):
         MIDDLEWARE=[
             "i18n.patterns.tests.PermanentRedirectLocaleMiddleWare",
             "django.middleware.common.CommonMiddleware",
-        ],
+        ]
     )
     def test_custom_redirect_class(self):
         response = self.client.get(
@@ -523,7 +523,7 @@ class URLTagTests(URLTestCaseBase):
         tpl = Template(
             """
             {% load i18n %}
-            {% language 'nl'  %}
+            {% language 'nl' %}
             {% url 'no-prefix-translated-slug' slug='apo' %}{% endlanguage %}
             {% language 'pt-br' %}
             {% url 'no-prefix-translated-slug' slug='apo' %}{% endlanguage %}
