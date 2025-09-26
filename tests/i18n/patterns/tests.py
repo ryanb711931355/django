@@ -314,7 +314,7 @@ class URLRedirectTests(URLTestCaseBase):
         MIDDLEWARE=[
             "i18n.patterns.tests.PermanentRedirectLocaleMiddleWare",
             "django.middleware.common.CommonMiddleware",
-        ],
+        ]
     )
     def test_custom_redirect_class(self):
         response = self.client.get(
@@ -356,7 +356,9 @@ class URLRedirectWithoutTrailingSlashTests(URLTestCaseBase):
     """
 
     def test_not_prefixed_redirect(self):
-        response = self.client.get("/not-prefixed", headers={"accept-language": "en"})
+        response = self.client.get(
+            "/not-prefixed", headers={"accept-language": "en"}
+        )
         self.assertRedirects(response, "/not-prefixed/", 301)
 
     def test_en_redirect(self):
@@ -381,7 +383,9 @@ class URLRedirectWithoutTrailingSlashSettingTests(URLTestCaseBase):
 
     @override_settings(APPEND_SLASH=False)
     def test_not_prefixed_redirect(self):
-        response = self.client.get("/not-prefixed", headers={"accept-language": "en"})
+        response = self.client.get(
+            "/not-prefixed", headers={"accept-language": "en"}
+        )
         self.assertEqual(response.status_code, 404)
 
     @override_settings(APPEND_SLASH=False)
@@ -523,7 +527,7 @@ class URLTagTests(URLTestCaseBase):
         tpl = Template(
             """
             {% load i18n %}
-            {% language 'nl'  %}
+            {% language 'nl' %}
             {% url 'no-prefix-translated-slug' slug='apo' %}{% endlanguage %}
             {% language 'pt-br' %}
             {% url 'no-prefix-translated-slug' slug='apo' %}{% endlanguage %}

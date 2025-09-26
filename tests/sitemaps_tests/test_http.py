@@ -521,11 +521,12 @@ class HTTPSitemapTests(SitemapTestsBase):
         sitemap_response = self.client.get("/callable-lastmod-partial/sitemap.xml")
         self.assertNotIn("Last-Modified", index_response)
         self.assertNotIn("Last-Modified", sitemap_response)
-        expected_content_index = """<?xml version="1.0" encoding="UTF-8"?>
-        <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-        <sitemap><loc>http://example.com/simple/sitemap-callable-lastmod.xml</loc></sitemap>
-        </sitemapindex>
-        """
+        expected_content_index = (
+            '<?xml version="1.0" encoding="UTF-8"?>\n'
+            '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+            '<sitemap><loc>http://example.com/simple/sitemap-callable-lastmod.xml</loc></sitemap>\n'
+            '</sitemapindex>\n'
+        )
         expected_content_sitemap = (
             '<?xml version="1.0" encoding="UTF-8"?>\n'
             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
@@ -551,11 +552,12 @@ class HTTPSitemapTests(SitemapTestsBase):
         self.assertEqual(
             sitemap_response.headers["Last-Modified"], "Thu, 13 Mar 2014 10:00:00 GMT"
         )
-        expected_content_index = """<?xml version="1.0" encoding="UTF-8"?>
-        <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-        <sitemap><loc>http://example.com/simple/sitemap-callable-lastmod.xml</loc><lastmod>2014-03-13T10:00:00</lastmod></sitemap>
-        </sitemapindex>
-        """
+        expected_content_index = (
+            '<?xml version="1.0" encoding="UTF-8"?>\n'
+            '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+            '<sitemap><loc>http://example.com/simple/sitemap-callable-lastmod.xml</loc><lastmod>2014-03-13T10:00:00</lastmod></sitemap>\n'
+            '</sitemapindex>\n'
+        )
         expected_content_sitemap = (
             '<?xml version="1.0" encoding="UTF-8"?>\n'
             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
