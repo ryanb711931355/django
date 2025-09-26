@@ -206,8 +206,7 @@ class RemoteTestResult(unittest.TestResult):
         pickle.loads(pickle.dumps(obj))
 
     def _print_unpicklable_subtest(self, test, subtest, pickle_exc):
-        print(
-            """
+        print("""
 Subtest failed:
 
     test: {}
@@ -220,10 +219,7 @@ test runner cannot handle it cleanly. Here is the pickling error:
 
 You should re-run this test with --parallel=1 to reproduce the failure
 with a cleaner failure message.
-""".format(
-                test, subtest, pickle_exc
-            )
-        )
+""".format(test, subtest, pickle_exc))
 
     def check_picklable(self, test, err):
         # Ensure that sys.exc_info() tuples are picklable. This displays a
@@ -244,8 +240,7 @@ with a cleaner failure message.
                 pickle_exc_txt, 75, initial_indent="    ", subsequent_indent="    "
             )
             if tblib is None:
-                print(
-                    """
+                print("""
 
 {} failed:
 
@@ -257,13 +252,9 @@ parallel test runner to handle this exception cleanly.
 In order to see the traceback, you should install tblib:
 
     python -m pip install tblib
-""".format(
-                        test, original_exc_txt
-                    )
-                )
+""".format(test, original_exc_txt))
             else:
-                print(
-                    """
+                print("""
 
 {} failed:
 
@@ -278,10 +269,7 @@ Here's the error encountered while trying to pickle the exception:
 
 You should re-run this test with the --parallel=1 option to reproduce the
 failure and get a correct traceback.
-""".format(
-                        test, original_exc_txt, pickle_exc_txt
-                    )
-                )
+""".format(test, original_exc_txt, pickle_exc_txt))
             raise
 
     def check_subtest_picklable(self, test, subtest):
