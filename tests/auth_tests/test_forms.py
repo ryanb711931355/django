@@ -231,7 +231,7 @@ class BaseUserCreationFormTest(TestDataMixin, TestCase):
                     "min_length": 12,
                 },
             },
-        ]
+        ],
     )
     def test_validates_password(self):
         data = {

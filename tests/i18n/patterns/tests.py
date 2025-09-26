@@ -314,7 +314,7 @@ class URLRedirectTests(URLTestCaseBase):
         MIDDLEWARE=[
             "i18n.patterns.tests.PermanentRedirectLocaleMiddleWare",
             "django.middleware.common.CommonMiddleware",
-        ],
+        ]
     )
     def test_custom_redirect_class(self):
         response = self.client.get(
@@ -490,7 +490,8 @@ class URLTagTests(URLTestCaseBase):
             {% language 'pt-br' %}{% url 'no-prefix-translated' %}{% endlanguage %}"""
         )
         self.assertEqual(
-            t.render(Context({})).strip().split(), ["/vertaald/", "/traduzidos/"]
+            t.render(Context({})).strip().split(),
+            ["/vertaald/", "/traduzidos/"],
         )
 
     def test_context(self):
@@ -501,7 +502,8 @@ class URLTagTests(URLTestCaseBase):
             {% language lang2 %}{% url 'no-prefix-translated' %}{% endlanguage %}"""
         )
         self.assertEqual(
-            tpl.render(ctx).strip().split(), ["/vertaald/", "/traduzidos/"]
+            tpl.render(ctx).strip().split(),
+            ["/vertaald/", "/traduzidos/"],
         )
 
     def test_args(self):
@@ -523,7 +525,7 @@ class URLTagTests(URLTestCaseBase):
         tpl = Template(
             """
             {% load i18n %}
-            {% language 'nl'  %}
+            {% language 'nl' %}
             {% url 'no-prefix-translated-slug' slug='apo' %}{% endlanguage %}
             {% language 'pt-br' %}
             {% url 'no-prefix-translated-slug' slug='apo' %}{% endlanguage %}
