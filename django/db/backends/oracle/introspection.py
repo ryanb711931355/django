@@ -7,9 +7,7 @@ from django.db.backends.base.introspection import BaseDatabaseIntrospection
 from django.db.backends.base.introspection import FieldInfo as BaseFieldInfo
 from django.db.backends.base.introspection import TableInfo as BaseTableInfo
 
-FieldInfo = namedtuple(
-    "FieldInfo", [*BaseFieldInfo._fields, "is_autofield", "is_json", "comment"]
-)
+FieldInfo = namedtuple("FieldInfo", [*BaseFieldInfo._fields, "is_autofield", "is_json", "comment"])
 TableInfo = namedtuple("TableInfo", [*BaseTableInfo._fields, "comment"])
 
 
@@ -166,15 +164,7 @@ class DatabaseIntrospection(BaseDatabaseIntrospection):
                 is_json,
                 comment,
             )
-            for (
-                column,
-                default,
-                collation,
-                display_size,
-                is_autofield,
-                is_json,
-                comment,
-            ) in cursor.fetchall()
+            for column, default, collation, display_size, is_autofield, is_json, comment in cursor.fetchall()
         }
         self.cache_bust_counter += 1
         cursor.execute(
@@ -260,12 +250,12 @@ class DatabaseIntrospection(BaseDatabaseIntrospection):
         table_name = table_name.upper()
         cursor.execute(
             """
-    SELECT ca.column_name, cb.table_name, cb.column_name
-    FROM   user_constraints, USER_CONS_COLUMNS ca, USER_CONS_COLUMNS cb
-    WHERE  user_constraints.table_name = %s AND
-           user_constraints.constraint_name = ca.constraint_name AND
-           user_constraints.r_constraint_name = cb.constraint_name AND
-           ca.position = cb.position""",
+            SELECT ca.column_name, cb.table_name, cb.column_name
+            FROM   user_constraints, USER_CONS_COLUMNS ca, USER_CONS_COLUMNS cb
+            WHERE  user_constraints.table_name = %s AND
+                   user_constraints.constraint_name = ca.constraint_name AND
+                   user_constraints.r_constraint_name = cb.constraint_name AND
+                   ca.position = cb.position""",
             [table_name],
         )
 

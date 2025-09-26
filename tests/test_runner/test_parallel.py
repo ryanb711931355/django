@@ -77,7 +77,6 @@ class SampleErrorTest(SimpleTestCase):
     @classmethod
     def setUpClass(cls):
         raise ValueError("woops")
-        super().setUpClass()
 
     # This method name doesn't begin with "test" to prevent test discovery
     # from seeing it.

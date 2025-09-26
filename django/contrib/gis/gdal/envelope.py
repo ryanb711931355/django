@@ -118,15 +118,11 @@ class Envelope:
             if isinstance(args[0], Envelope):
                 return self.expand_to_include(args[0].tuple)
             elif hasattr(args[0], "x") and hasattr(args[0], "y"):
-                return self.expand_to_include(
-                    args[0].x, args[0].y, args[0].x, args[0].y
-                )
+                return self.expand_to_include(args[0].x, args[0].y, args[0].x, args[0].y)
             elif isinstance(args[0], (tuple, list)):
                 # A tuple was passed in.
                 if len(args[0]) == 2:
-                    return self.expand_to_include(
-                        (args[0][0], args[0][1], args[0][0], args[0][1])
-                    )
+                    return self.expand_to_include((args[0][0], args[0][1], args[0][0], args[0][1]))
                 elif len(args[0]) == 4:
                     (minx, miny, maxx, maxy) = args[0]
                     if minx < self._envelope.MinX:

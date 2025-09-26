@@ -69,6 +69,7 @@ class CursorWrapper:
         4025,  # CHECK constraint failed
     )
 
+
     def __init__(self, cursor):
         self.cursor = cursor
 
@@ -249,6 +250,7 @@ class DatabaseWrapper(BaseDatabaseWrapper):
                         ", ".join("'%s'" % s for s in sorted(self.isolation_levels)),
                     )
                 )
+
         self.isolation_level = isolation_level
         kwargs.update(options)
         return kwargs
@@ -273,6 +275,7 @@ class DatabaseWrapper(BaseDatabaseWrapper):
                 "SET SESSION TRANSACTION ISOLATION LEVEL %s"
                 % self.isolation_level.upper()
             )
+
 
         if assignments:
             with self.cursor() as cursor:
@@ -356,6 +359,7 @@ class DatabaseWrapper(BaseDatabaseWrapper):
                             referenced_column_name,
                         )
                     )
+
                     for bad_row in cursor.fetchall():
                         raise IntegrityError(
                             "The row in table '%s' with primary key '%s' has an "
@@ -411,6 +415,7 @@ class DatabaseWrapper(BaseDatabaseWrapper):
                        CONVERT_TZ('2001-01-01 01:00:00', 'UTC', 'UTC') IS NOT NULL
             """
             )
+
             row = cursor.fetchone()
         return {
             "version": row[0],

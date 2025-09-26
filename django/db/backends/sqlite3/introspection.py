@@ -130,12 +130,7 @@ class DatabaseIntrospection(BaseDatabaseIntrospection):
                 name in json_columns,
             )
             for cid, name, data_type, notnull, default, pk, hidden in table_info
-            if hidden
-            in [
-                0,  # Normal column.
-                2,  # Virtual generated column.
-                3,  # Stored generated column.
-            ]
+            if hidden in [0, 2, 3]
         ]
         # If the primary key is composed of multiple columns they should not
         # be individually marked as pk.
@@ -161,14 +156,7 @@ class DatabaseIntrospection(BaseDatabaseIntrospection):
         )
         return {
             column_name: (ref_column_name, ref_table_name)
-            for (
-                _,
-                _,
-                ref_table_name,
-                column_name,
-                ref_column_name,
-                *_,
-            ) in cursor.fetchall()
+            for _, _, ref_table_name, column_name, ref_column_name, *_ in cursor.fetchall()
         }
 
     def get_primary_key_columns(self, cursor, table_name):

@@ -259,8 +259,11 @@ class LayerMapping:
                 ):
                     raise LayerMapError(
                         "Invalid mapping geometry; model has %s%s, "
-                        "layer geometry type is %s."
-                        % (fld_name, "(dim=3)" if coord_dim == 3 else "", ltype)
+                        "layer geometry type is %s." % (
+                            fld_name,
+                            "(dim=3)" if coord_dim == 3 else "",
+                            ltype,
+                        )
                     )
 
                 # Setting the `geom_field` attribute w/the name of the model
@@ -279,8 +282,10 @@ class LayerMapping:
                             rel_model._meta.get_field(rel_name)
                         except FieldDoesNotExist:
                             raise LayerMapError(
-                                'ForeignKey mapping field "%s" not in %s fields.'
-                                % (rel_name, rel_model.__class__.__name__)
+                                'ForeignKey mapping field "%s" not in %s fields.' % (
+                                    rel_name,
+                                    rel_model.__class__.__name__,
+                                )
                             )
                     fields_val = rel_model
                 else:
@@ -299,8 +304,11 @@ class LayerMapping:
                 # Can the OGR field type be mapped to the Django field type?
                 if not issubclass(ogr_field, self.FIELD_TYPES[model_field.__class__]):
                     raise LayerMapError(
-                        'OGR field "%s" (of type %s) cannot be mapped to Django %s.'
-                        % (ogr_field, ogr_field.__name__, fld_name)
+                        'OGR field "%s" (of type %s) cannot be mapped to Django %s.' % (
+                            ogr_field,
+                            ogr_field.__name__,
+                            fld_name,
+                        )
                     )
                 fields_val = model_field
 
@@ -406,8 +414,11 @@ class LayerMapping:
                 and len(val) > model_field.max_length
             ):
                 raise InvalidString(
-                    "%s model field maximum string length is %s, given %s characters."
-                    % (model_field.name, model_field.max_length, len(val))
+                    "%s model field maximum string length is %s, given %s characters." % (
+                        model_field.name,
+                        model_field.max_length,
+                        len(val),
+                    )
                 )
         elif isinstance(ogr_field, OFTReal) and isinstance(
             model_field, models.DecimalField
@@ -441,8 +452,11 @@ class LayerMapping:
             if n_prec > max_prec:
                 raise InvalidDecimal(
                     "A DecimalField with max_digits %d, decimal_places %d must "
-                    "round to an absolute value less than 10^%d."
-                    % (model_field.max_digits, model_field.decimal_places, max_prec)
+                    "round to an absolute value less than 10^%d." % (
+                        model_field.max_digits,
+                        model_field.decimal_places,
+                        max_prec,
+                    )
                 )
             val = d
         elif isinstance(ogr_field, (OFTReal, OFTString)) and isinstance(
@@ -481,8 +495,10 @@ class LayerMapping:
             return rel_model.objects.using(self.using).get(**fk_kwargs)
         except ObjectDoesNotExist:
             raise MissingForeignKey(
-                "No ForeignKey %s model found with keyword arguments: %s"
-                % (rel_model.__name__, fk_kwargs)
+                "No ForeignKey %s model found with keyword arguments: %s" % (
+                    rel_model.__name__,
+                    fk_kwargs,
+                )
             )
 
     def verify_geom(self, geom, model_field):

@@ -46,7 +46,11 @@ AREA_PREFIX = "sq_"
 
 
 def pretty_name(obj):
-    return obj.__name__ if obj.__class__ == type else obj.__class__.__name__
+    return (
+        obj.__name__
+        if obj.__class__ == type
+        else obj.__class__.__name__
+    )
 
 
 @total_ordering
@@ -84,7 +88,10 @@ class MeasureBase:
         )
 
     def __str__(self):
-        return "%s %s" % (getattr(self, self._default_unit), self._default_unit)
+        return "%s %s" % (
+            getattr(self, self._default_unit),
+            self._default_unit,
+        )
 
     # **** Comparison methods ****
 
@@ -113,7 +120,8 @@ class MeasureBase:
             )
         else:
             raise TypeError(
-                "%(class)s must be added with %(class)s" % {"class": pretty_name(self)}
+                "%(class)s must be added with %(class)s"
+                % {"class": pretty_name(self)}
             )
 
     def __iadd__(self, other):
@@ -339,9 +347,7 @@ class Distance(MeasureBase):
         else:
             raise TypeError(
                 "%(distance)s must be multiplied with number or %(distance)s"
-                % {
-                    "distance": pretty_name(self.__class__),
-                }
+                % {"distance": pretty_name(self.__class__)}
             )
 
 
@@ -365,7 +371,8 @@ class Area(MeasureBase):
             )
         else:
             raise TypeError(
-                "%(class)s must be divided by a number" % {"class": pretty_name(self)}
+                "%(class)s must be divided by a number"
+                % {"class": pretty_name(self)}
             )
 
 

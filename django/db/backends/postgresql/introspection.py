@@ -265,16 +265,7 @@ class DatabaseIntrospection(BaseDatabaseIntrospection):
         """,
             [self.index_default_access_method, table_name],
         )
-        for (
-            index,
-            columns,
-            unique,
-            primary,
-            orders,
-            type_,
-            definition,
-            options,
-        ) in cursor.fetchall():
+        for index, columns, unique, primary, orders, type_, definition, options in cursor.fetchall():
             if index not in constraints:
                 basic_index = (
                     type_ == self.index_default_access_method

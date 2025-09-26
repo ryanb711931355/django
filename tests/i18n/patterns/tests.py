@@ -252,10 +252,7 @@ class URLNamespaceTests(URLTestCaseBase):
 
 
 class URLRedirectTests(URLTestCaseBase):
-    """
-    Tests if the user gets redirected to the right URL when there is no
-    language-prefix in the request URL.
-    """
+    """Tests if the user gets redirected to the right URL when there is no language-prefix in the request URL."""
 
     def test_no_prefix_response(self):
         response = self.client.get("/not-prefixed/")
@@ -314,7 +311,7 @@ class URLRedirectTests(URLTestCaseBase):
         MIDDLEWARE=[
             "i18n.patterns.tests.PermanentRedirectLocaleMiddleWare",
             "django.middleware.common.CommonMiddleware",
-        ],
+        ]
     )
     def test_custom_redirect_class(self):
         response = self.client.get(
@@ -324,9 +321,7 @@ class URLRedirectTests(URLTestCaseBase):
 
 
 class URLVaryAcceptLanguageTests(URLTestCaseBase):
-    """
-    'Accept-Language' is not added to the Vary header when using prefixed URLs.
-    """
+    """'Accept-Language' is not added to the Vary header when using prefixed URLs."""
 
     def test_no_prefix_response(self):
         response = self.client.get("/not-prefixed/")
@@ -350,10 +345,7 @@ class URLVaryAcceptLanguageTests(URLTestCaseBase):
 
 
 class URLRedirectWithoutTrailingSlashTests(URLTestCaseBase):
-    """
-    Tests the redirect when the requested URL doesn't end with a slash
-    (`settings.APPEND_SLASH=True`).
-    """
+    """Tests the redirect when the requested URL doesn't end with a slash (`settings.APPEND_SLASH=True`)."""
 
     def test_not_prefixed_redirect(self):
         response = self.client.get("/not-prefixed", headers={"accept-language": "en"})
@@ -374,10 +366,7 @@ class URLRedirectWithoutTrailingSlashTests(URLTestCaseBase):
 
 
 class URLRedirectWithoutTrailingSlashSettingTests(URLTestCaseBase):
-    """
-    Tests the redirect when the requested URL doesn't end with a slash
-    (`settings.APPEND_SLASH=False`).
-    """
+    """Tests the redirect when the requested URL doesn't end with a slash (`settings.APPEND_SLASH=False`)."""
 
     @override_settings(APPEND_SLASH=False)
     def test_not_prefixed_redirect(self):
@@ -463,9 +452,7 @@ class URLPrefixedFalseTranslatedTests(URLTestCaseBase):
 
 
 class URLRedirectWithScriptAliasTests(URLTestCaseBase):
-    """
-    #21579 - LocaleMiddleware should respect the script prefix.
-    """
+    """#21579 - LocaleMiddleware should respect the script prefix."""
 
     def test_language_prefix_with_script_prefix(self):
         prefix = "/script_prefix"
@@ -479,9 +466,7 @@ class URLRedirectWithScriptAliasTests(URLTestCaseBase):
 
 
 class URLTagTests(URLTestCaseBase):
-    """
-    Test if the language tag works.
-    """
+    """Test if the language tag works."""
 
     def test_strings_only(self):
         t = Template(

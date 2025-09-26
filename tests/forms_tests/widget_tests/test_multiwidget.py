@@ -53,7 +53,11 @@ class ComplexField(MultiValueField):
             SplitDateTimeField(),
         )
         super().__init__(
-            fields, required=required, widget=widget, label=label, initial=initial
+            fields,
+            required=required,
+            widget=widget,
+            label=label,
+            initial=initial,
         )
 
     def compress(self, data_list):
@@ -71,7 +75,9 @@ class DeepCopyWidget(MultiWidget):
     Used to test MultiWidget.__deepcopy__().
     """
 
-    def __init__(self, choices=[]):
+    def __init__(self, choices=None):
+        if choices is None:
+            choices = []
         widgets = [
             RadioSelect(choices=choices),
             TextInput,
@@ -229,7 +235,7 @@ class MultiWidgetTest(WidgetTest):
             ({"field": "x", "field_x": "y"}, ["y", "x"]),
         ]
         for data, expected in tests:
-            with self.subTest(data):
+            with self.subTest(data=data):
                 self.assertEqual(
                     widget.value_from_datadict(data, {}, "field"),
                     expected,
@@ -244,7 +250,7 @@ class MultiWidgetTest(WidgetTest):
             ({"field": "x", "field_x": "y"}, False),
         ]
         for data, expected in tests:
-            with self.subTest(data):
+            with self.subTest(data=data):
                 self.assertIs(
                     widget.value_omitted_from_data(data, {}, "field"),
                     expected,
